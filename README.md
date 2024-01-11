@@ -6,7 +6,7 @@ This library, named `http-event`, simplifies the process of handling HTTP events
 
 ## Installation
 
-Include the `http-event.js` file in your project:
+Include the `cdn` file in your project:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/lullaby6/http-event/cdn.min.js" defer></script>
@@ -16,10 +16,7 @@ Include the `http-event.js` file in your project:
 
 To use the library, follow these steps:
 
-1. **Include the Script:**
-   Include the `http-event.js` script in your HTML file.
-
-2. **Declare HTML Elements:**
+1. **Declare HTML Elements:**
    Add the `he-event` attribute to HTML elements that should trigger HTTP events. Specify the type of event using the `he-event` attribute.
 
    ```html
@@ -29,7 +26,7 @@ To use the library, follow these steps:
    </form>
    ```
 
-3. **Configure Attributes:**
+2. **Configure Attributes:**
    Customize the HTTP request by adding attributes to the HTML elements.
 
    - `he-url`: Specifies the URL for the HTTP request.
@@ -45,7 +42,7 @@ To use the library, follow these steps:
    <button he-event="click" he-url="/api/data" he-method="GET" he-authentication="Bearer token">Load Data</button>
    ```
 
-4. **Handle Responses:**
+3. **Handle Responses:**
    Customize the handling of the HTTP response using various attributes.
 
    - `he-json`: Parses the response as JSON.
@@ -59,7 +56,7 @@ To use the library, follow these steps:
    <div he-event="click" he-url="/api/data" he-method="GET" he-json he-log he-run="console.log('Response received!')">Load Data</div>
    ```
 
-5. **Update UI: Specify Swap Method (`he-swap`)**
+4. **Update UI: Specify Swap Method (`he-swap`)**
 
     The `he-swap` attribute defines how the response data should be swapped or inserted into the target element. Choose one of the following options:
 
@@ -81,7 +78,7 @@ To use the library, follow these steps:
 
     In this example, when the element with `he-event="click"` is triggered, a GET request is sent to `/api/data`. The response data will replace the inner HTML content of the element with the ID `result`. The `he-swap="innerHTML"` indicates the desired method for updating the UI. Choose the appropriate `he-swap` option based on the specific requirement for handling the HTTP response data.
 
-6. **Redirect (Optional):**
+5. **Redirect (Optional):**
    Optionally, redirect to a different URL after receiving the response.
 
    ```html
