@@ -1,4 +1,4 @@
-# HTTP Event Library
+# HTTP Event
 
 ## Overview
 
@@ -9,7 +9,7 @@ This library, named `http-event`, simplifies the process of handling HTTP events
 Include the `http-event.js` file in your project:
 
 ```html
-<script src="path/to/http-event.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/lullaby6/http-event/cdn.min.js" defer></script>
 ```
 
 ## Usage
@@ -59,14 +59,19 @@ To use the library, follow these steps:
    <div he-event="click" he-url="/api/data" he-method="GET" he-json he-log he-run="console.log('Response received!')">Load Data</div>
    ```
 
-5. **Update UI:**
-   Update the UI based on the response by specifying a target element using the `he-target` attribute. Choose a swap method (`he-swap`) and optionally set attributes (`he-attr`).
+### 5. Update UI: Specify Swap Method (`he-swap`)
 
-   Example:
+The `he-swap` attribute defines how the response data should be swapped or inserted into the target element. Choose one of the following options:
 
-   ```html
-   <div he-event="click" he-url="/api/data" he-method="GET" he-target="#result" he-swap="innerHTML" he-attr="data-info">Load Data</div>
-   ```
+- `innerHTML`: Replace the inner HTML content of the target element with the response data.
+- `outerHTML`: Replace the entire outer HTML content of the target element with the response data.
+- `value`: Set the value of the target element (useful for form elements like input).
+- `innerText`: Set the inner text content of the target element with the response data.
+- `textContent`: Set the text content of the target element with the response data.
+- `afterbegin`, `beforeend`, `beforebegin`, `afterend`: Insert the response data at a specific position relative to the target element.
+- `remove`: Remove the target element.
+
+Choose the appropriate `he-swap` option based on the desired behavior for updating the UI with the HTTP response data.
 
 6. **Redirect (Optional):**
    Optionally, redirect to a different URL after receiving the response.
