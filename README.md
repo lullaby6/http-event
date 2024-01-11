@@ -56,7 +56,8 @@ To use the library, follow these steps:
    <div he-event="click" he-url="/api/data" he-method="GET" he-json he-log he-run="console.log('Response received!')">Load Data</div>
    ```
 
-4. **Update UI: Specify Swap Method (`he-swap`)**
+4. **Update UI: Specify Swap Method (`he-swap`):**
+
     The `he-swap` attribute defines how the response data should be swapped or inserted into the target element. Choose one of the following options:
 
     ```html
