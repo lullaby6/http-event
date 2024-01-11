@@ -59,19 +59,19 @@ To use the library, follow these steps:
    <div he-event="click" he-url="/api/data" he-method="GET" he-json he-log he-run="console.log('Response received!')">Load Data</div>
    ```
 
-### 5. Update UI: Specify Swap Method (`he-swap`)
+5. **Update UI: Specify Swap Method (`he-swap`)**
 
-The `he-swap` attribute defines how the response data should be swapped or inserted into the target element. Choose one of the following options:
+    The `he-swap` attribute defines how the response data should be swapped or inserted into the target element. Choose one of the following options:
 
-- `innerHTML`: Replace the inner HTML content of the target element with the response data.
-- `outerHTML`: Replace the entire outer HTML content of the target element with the response data.
-- `value`: Set the value of the target element (useful for form elements like input).
-- `innerText`: Set the inner text content of the target element with the response data.
-- `textContent`: Set the text content of the target element with the response data.
-- `afterbegin`, `beforeend`, `beforebegin`, `afterend`: Insert the response data at a specific position relative to the target element.
-- `remove`: Remove the target element.
+    - `innerHTML`: Replace the inner HTML content of the target element with the response data.
+    - `outerHTML`: Replace the entire outer HTML content of the target element with the response data.
+    - `value`: Set the value of the target element (useful for form elements like input).
+    - `innerText`: Set the inner text content of the target element with the response data.
+    - `textContent`: Set the text content of the target element with the response data.
+    - `afterbegin`, `beforeend`, `beforebegin`, `afterend`: Insert the response data at a specific position relative to the target element.
+    - `remove`: Remove the target element.
 
-Choose the appropriate `he-swap` option based on the desired behavior for updating the UI with the HTTP response data.
+    Choose the appropriate `he-swap` option based on the desired behavior for updating the UI with the HTTP response data.
 
 6. **Redirect (Optional):**
    Optionally, redirect to a different URL after receiving the response.
