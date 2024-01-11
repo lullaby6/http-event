@@ -66,13 +66,13 @@ To use the library, follow these steps:
     In this example, when the element with `he-event="click"` is triggered, a GET request is sent to `/api/data`. The response data will replace the inner HTML content of the element with the ID `result`. The `he-swap="innerHTML"` indicates the desired method for updating the UI.
 
     **`he-swap` Options:**
-        - `innerHTML`: Replace the inner HTML content of the target element with the response data.
-        - `outerHTML`: Replace the entire outer HTML content of the target element with the response data.
-        - `value`: Set the value of the target element (useful for form elements like input).
-        - `innerText`: Set the inner text content of the target element with the response data.
-        - `textContent`: Set the text content of the target element with the response data.
-        - `afterbegin`, `beforeend`, `beforebegin`, `afterend`: Insert the response data at a specific position relative to the target element.
-        - `remove`: Remove the target element.
+    - `innerHTML`: Replace the inner HTML content of the target element with the response data.
+    - `outerHTML`: Replace the entire outer HTML content of the target element with the response data.
+    - `value`: Set the value of the target element (useful for form elements like input).
+    - `innerText`: Set the inner text content of the target element with the response data.
+    - `textContent`: Set the text content of the target element with the response data.
+    - `afterbegin`, `beforeend`, `beforebegin`, `afterend`: Insert the response data at a specific position relative to the target element.
+    - `remove`: Remove the target element.
 
     Choose the appropriate `he-swap` option based on the desired behavior for updating the UI with the HTTP response data.
 
