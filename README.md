@@ -73,6 +73,14 @@ To use the library, follow these steps:
 
     Choose the appropriate `he-swap` option based on the desired behavior for updating the UI with the HTTP response data.
 
+    The `he-swap` attribute determines how the response data should be integrated into the target element. Here's a minimal example of usage:
+
+    ```html
+    <div he-event="click" he-url="/api/data" he-method="GET" he-target="#result" he-swap="innerHTML">Load Data</div>
+    ```
+
+    In this example, when the element with `he-event="click"` is triggered, a GET request is sent to `/api/data`. The response data will replace the inner HTML content of the element with the ID `result`. The `he-swap="innerHTML"` indicates the desired method for updating the UI. Choose the appropriate `he-swap` option based on the specific requirement for handling the HTTP response data.
+
 6. **Redirect (Optional):**
    Optionally, redirect to a different URL after receiving the response.
 
