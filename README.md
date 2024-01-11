@@ -84,7 +84,3 @@ To use the library, follow these steps:
    ```html
    <form he-event="submit" he-url="/api/submit" he-method="POST" he-redirect="/success">Submit Form</form>
    ```
-
-## Why `http-event`?
-
-The `http-event` library simplifies the integration of HTTP requests in the browser by providing a declarative and easy-to-use approach. It minimizes the boilerplate code needed to handle HTTP events, making it suitable for projects where simplicity and efficiency are crucial.
