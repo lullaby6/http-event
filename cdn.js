@@ -59,7 +59,11 @@ async function httpEventMethod(targetElement, eventName){
         if(targetElement.hasAttribute('he-json')) responseData = await response.json()
         else responseData = await response.text()
 
-        if(targetElement.hasAttribute('he-log')) console.log(responseData)
+        if(targetElement.hasAttribute('he-log')) {
+            console.log(`[http-event response]`, responseData);
+            console.log(`[http-event headers]`, headers);
+            console.log(`[http-event body]`, httpData);
+        }
 
         if(targetElement.hasAttribute('he-storage')) localStorage.setItem(targetElement.getAttribute('he-storage'), responseData)
 
@@ -105,7 +109,9 @@ async function httpEventMethod(targetElement, eventName){
 
         if (targetElement.hasAttribute('he-redirect')) window.location.href = targetElement.getAttribute('he-redirect')
     } catch (error) {
-        console.error(`[http-event] ${error}`)
+        console.error(`[http-event error] ${error}`);
+        console.error(`[http-event headers]`, headers);
+        console.error(`[http-event body]`, httpData);
     }
 }
 
