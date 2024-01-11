@@ -44,9 +44,7 @@ async function httpEventMethod(targetElement, eventName){
     if(targetElement.hasAttribute('he-headers-storage')){
         storageHeaders = JSON.parse(targetElement.getAttribute('he-headers-storage'))
 
-        Object.entries(storageHeaders).forEach(([header, storage]) => {
-            storageHeaders[header] = localStorage.getItem(storage)
-        })
+        Object.entries(storageHeaders).forEach(([header, storage]) => storageHeaders[header] = localStorage.getItem(storage))
 
         headers = {...headers, ...storageHeaders}
     }
@@ -60,11 +58,8 @@ async function httpEventMethod(targetElement, eventName){
 
         let responseData = null
 
-        if(targetElement.hasAttribute('he-json')){
-            responseData = await response.json()
-        }else{
-            responseData = await response.text()
-        }
+        if(targetElement.hasAttribute('he-json')) responseData = await response.json()
+        else responseData = await response.text()
 
         if(targetElement.hasAttribute('he-log')) console.log(responseData)
 
@@ -109,6 +104,8 @@ async function httpEventMethod(targetElement, eventName){
                 if(targetElement.hasAttribute('he-attr')) targetSelector.setAttribute(targetElement.getAttribute('he-attr'), responseData)
             }
         }
+
+        if (targetElement.hasAttribute('he-redirect')) window.location.href = targetElement.getAttribute('he-redirect')
     } catch (error) {
         console.error(`[http-event] ${error}`)
     }
