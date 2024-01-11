@@ -10,11 +10,9 @@ function httpEvent(){
         if (eventName == "load") httpEventMethod(element, eventName)
         else{
             element.addEventListener(eventName, async event => {
-                event.preventDefault()
+                if (event.target.hasAttribute('he-prevent')) event.preventDefault()
 
-                const targetElement = event.target
-
-                httpEventMethod(targetElement, eventName)
+                httpEventMethod(event.target, eventName)
             })
         }
     })
