@@ -18,19 +18,17 @@ function httpEvent(){
     const elements = document.querySelectorAll('[he-event]')
 
     elements.forEach(element => {
-        if (element.hasAttribute('he-loaded')) return
-        element.setAttribute('he-loaded', '')
+        if (element.httpEventLoaded) return
+        element.httpEventLoaded = true
 
         const eventName = element.getAttribute('he-event')
 
         if (eventName == "load") httpEventMethod(element, eventName)
-        else{
-            element.addEventListener(eventName, async event => {
-                if (event.target.hasAttribute('he-prevent')) event.preventDefault()
+        else element.addEventListener(eventName, async event => {
+            event.preventDefault()
 
-                httpEventMethod(event.target, eventName)
-            })
-        }
+            httpEventMethod(event.target, eventName)
+        })
     })
 }
 
