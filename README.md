@@ -31,6 +31,7 @@ To use the library, follow these steps:
 
     - `he-url`: Specifies the URL for the HTTP request.
     - `he-method`: Specifies the HTTP method (default is GET).
+    - `he-status-code`: Specifies the expected Status Code of the Response.
     - `he-authentication`: Adds an authentication header.
     - `he-authorization`: Adds an authorization header.
     - `he-headers`: Provides additional headers in JSON format.
@@ -56,26 +57,7 @@ To use the library, follow these steps:
         <div he-event="click" he-url="/api/data" he-method="GET" he-json he-log he-run="console.log('Response received!')">Load Data</div>
     ```
 
-4. **Update UI:**
-
-    The `he-swap` attribute defines how the response data should be swapped or inserted into the target element. Choose one of the following options:
-
-    ```html
-        <div he-event="click" he-url="/api/data" he-method="GET" he-target="#result" he-swap="innerHTML">Load Data</div>
-    ```
-
-    In this example, when the element with `he-event="click"` is triggered, a GET request is sent to `/api/data`. The response data will replace the inner HTML content of the element with the ID  `result`. The `he-swap="innerHTML"` indicates the desired method for updating the UI.
-
-    **`he-swap` Options:**
-    - `innerHTML`: Replace the inner HTML content of the target element with the response data.
-    - `outerHTML`: Replace the entire outer HTML content of the target element with the response data.
-    - `value`: Set the value of the target element (useful for form elements like input).
-    - `innerText`: Set the inner text content of the target element with the response data.
-    - `textContent`: Set the text content of the target element with the response data.
-    - `afterbegin`, `beforeend`, `beforebegin`, `afterend`: Insert the response data at a specific position relative to the target element.
-    - `remove`: Remove the target element.
-
-5. **Redirect:**
+4. **Redirect:**
     Optionally, redirect to a different URL after receiving the response.
 
     ```html

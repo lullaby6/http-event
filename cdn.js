@@ -1,3 +1,19 @@
+function httpEventGetElement(element, query){
+    let targetSelector
+
+    if (query == 'this') targetSelector = element
+    else if (query == 'parent') targetSelector = element.parentElement
+    else if (query == 'children') targetSelector = element.children
+    else if (query == 'next') targetSelector = element.nextElementSibling
+    else if (query == 'previous') targetSelector = element.previousElementSibling
+
+    if (!targetSelector) targetSelector = element.querySelector(query)
+    if (!targetSelector) targetSelector = element.closest(query)
+    if (!targetSelector) targetSelector = document.querySelector(query)
+
+    return targetSelector
+}
+
 function httpEvent(){
     const elements = document.querySelectorAll('[he-event]')
 
@@ -54,6 +70,16 @@ async function httpEventMethod(targetElement, eventName){
             body: JSON.stringify(httpData)
         })
 
+        if(targetElement.hasAttribute('he-status-code')) {
+            if (response.status != targetElement.getAttribute('he-status-code')) {
+                const responseJson = await response.json()
+                if (responseJson.message) throw new Error(responseJson.message)
+                if (responseJson.msg) throw new Error(responseJson.msg)
+                if (responseJson.error) throw new Error(responseJson.error)
+                throw new Error(`${response.status} ${response.statusText}`)
+            }
+        }
+
         let responseData = null
 
         if(targetElement.hasAttribute('he-json')) responseData = await response.json()
@@ -77,44 +103,53 @@ async function httpEventMethod(targetElement, eventName){
             inputs.forEach(input => input.value = '')
         }
 
-        if(targetElement.hasAttribute('he-target')){
-            const selector = targetElement.getAttribute('he-target')
+        if(targetElement.hasAttribute('he-success-target')){
+            const successElement = httpEventGetElement(targetElement, targetElement.getAttribute('he-success-target'))
 
-            let targetSelector = null
+            if (successElement) {
+                let text = targetElement.getAttribute('he-success-text') || null
 
-            if (selector == 'this') targetSelector = targetElement
-            else if (selector == 'parent') targetSelector = targetElement.parentElement
-            else if (selector == 'children') targetSelector = targetElement.children
-            else if (selector == 'next') targetSelector = targetElement.nextElementSibling
-            else if (selector == 'previous') targetSelector = targetElement.previousElementSibling
+                if (!text) {
+                    if (typeof responseData == 'object') {
+                        if (responseData.message) text = responseData.message
+                        else if (responseData.msg) text = responseData.msg
+                        else text = responseData
+                    } else {
+                        try {
+                            const responseJson = JSON.parse(responseData)
+                            if (responseJson.message) text = responseJson.message
+                            else if (responseJson.msg) text = responseJson.msg
+                            else text = responseData
+                        } catch (error) {
+                            text = responseData
+                        }
+                    }
+                }
 
-            if (!targetSelector) targetSelector = targetElement.querySelector(selector)
-            if (!targetSelector) targetSelector = targetElement.closest(selector)
-            if (!targetSelector) targetSelector = document.querySelector(selector)
-
-            if (targetSelector) {
-                const swap = targetElement.getAttribute('he-swap') || 'innerHTML'
-
-                if (swap == 'innerHTML') targetSelector.innerHTML = responseData
-                else if (swap == 'outerHTML') targetSelector.outerHTML = responseData
-                else if (swap == 'value') targetSelector.value = responseData
-                else if (swap == 'innerText') targetSelector.innerText = responseData
-                else if (swap == 'textContent') targetSelector.textContent = responseData
-                else if (swap == 'afterbegin' || swap == 'beforeend' || swap == 'beforebegin' || swap == 'afterend') targetSelector.insertAdjacentHTML(swap, responseData)
-                else if (swap == 'remove') targetSelector.remove()
-
-                if(targetElement.hasAttribute('he-attr')) targetSelector.setAttribute(targetElement.getAttribute('he-attr'), responseData)
+                if (text) successElement.innerText = text
             }
         }
 
         if (targetElement.hasAttribute('he-redirect')) window.location.href = targetElement.getAttribute('he-redirect')
     } catch (error) {
-        console.error(`[http-event error] ${error}`);
-        console.error(`[http-event headers]`, headers);
-        console.error(`[http-event body]`, httpData);
+        if(targetElement.hasAttribute('he-log')) {
+            console.error(`[http-event error] ${error}`);
+            console.error(`[http-event headers]`, headers);
+            console.error(`[http-event body]`, httpData);
+        }
+
+        if(targetElement.hasAttribute('he-error-target')){
+            const errorElement = httpEventGetElement(targetElement, targetElement.getAttribute('he-error-target'))
+
+            if (errorElement) {
+                const text = targetElement.getAttribute('he-error-text') || error.message
+
+                errorElement.innerText = text
+            }
+        }
     }
 }
 
-document.addEventListener('DOMContentLoaded', e => {
+document.addEventListener('DOMContentLoaded', () => {
     httpEvent()
 })
