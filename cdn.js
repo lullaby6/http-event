@@ -44,6 +44,18 @@ async function httpEventMethod(element, eventName) {
         } catch (error) {}
     }
 
+    if (element.hasAttribute('he-target-form')) {
+        try {
+            const form = httpEventGetElement(element, element.getAttribute('he-target-form'))
+            const formData = new FormData(form)
+            const formDataObj = Object.fromEntries(formData)
+            body = {
+                ...body,
+                ...formDataObj
+            }
+        } catch (error) {}
+    }
+
     if (element.hasAttribute('he-data')) {
         try {
             body = {
