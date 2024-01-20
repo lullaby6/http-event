@@ -5,7 +5,7 @@ function httpEventGetElement(element, query) {
     else if (query == 'parent') targetSelector = element.parentElement
     else if (query == 'children') targetSelector = element.children
     else if (query == 'next') targetSelector = element.nextElementSibling
-    else if (query == 'previous') targetSelector = element.previousElementSibling
+    else if (query == 'prev') targetSelector = element.previousElementSibling
 
     if (!targetSelector) targetSelector = element.querySelector(query)
     if (!targetSelector) targetSelector = element.closest(query)
@@ -206,9 +206,9 @@ function httpEvent(){
 document.addEventListener('DOMContentLoaded', () => {
     httpEvent()
 
-    const httpEventMutationObserver = new MutationObserver(httpEvent)
+    window.httpEventMutationObserver = new MutationObserver(httpEvent)
 
-    httpEventMutationObserver.observe(document.body, {
+    window.httpEventMutationObserver.observe(document.body, {
         attributes: true,
         characterData: true,
         childList: true,
