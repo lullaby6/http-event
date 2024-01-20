@@ -1,4 +1,4 @@
-function httpEventGetElement(element, query){
+function httpEventGetElement(element, query) {
     let targetSelector
 
     if (query == 'this') targetSelector = element
@@ -14,112 +14,159 @@ function httpEventGetElement(element, query){
     return targetSelector
 }
 
-function httpEvent(){
-    const elements = document.querySelectorAll('[he-event]')
+function httpEventLoad(element) {
+    element.setAttribute('he-loaded', '')
 
-    elements.forEach(element => {
-        if (element.httpEventLoaded) return
-        element.httpEventLoaded = true
+    const eventName = element.getAttribute('he-event')
 
-        const eventName = element.getAttribute('he-event')
+    if (eventName == 'load') httpEventMethod(element, eventName)
+    else element.addEventListener(eventName, async event => {
+        event.preventDefault()
 
-        if (eventName == "load") httpEventMethod(element, eventName)
-        else element.addEventListener(eventName, async event => {
-            event.preventDefault()
-
-            httpEventMethod(event.target, eventName)
-        })
+        httpEventMethod(event.target, eventName)
     })
 }
 
-async function httpEventMethod(targetElement, eventName){
-    let httpData = {}
-
-    if (eventName == "submit") httpData = Object.fromEntries(new FormData(targetElement))
-
-    if(targetElement.hasAttribute('he-data')) httpData = {...httpData, ...JSON.parse(targetElement.getAttribute('he-data'))}
-
-    const url = targetElement.getAttribute('he-url') || window.location.href
-    const method = targetElement.getAttribute('he-method') || 'GET'
+async function httpEventMethod(element, eventName) {
+    const url = element.getAttribute('he-url') || window.location.href
+    const method = element.getAttribute('he-method') || 'GET'
 
     let headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
+    let body = {}
 
-    if(targetElement.hasAttribute('he-authentication')) headers['Authentication'] = targetElement.getAttribute('he-authentication')
+    if (eventName == 'submit') {
+        try {
+            const formData = new FormData(element)
+            body = Object.fromEntries(formData)
+        } catch (error) {}
+    }
 
-    if(targetElement.hasAttribute('he-authorization')) headers['Authorization'] = targetElement.getAttribute('he-authorization')
+    if (element.hasAttribute('he-data')) {
+        try {
+            body = {
+                ...body,
+                ...JSON.parse(element.getAttribute('he-data'))
+            }
+        } catch (error) {}
+    }
 
-    if(targetElement.hasAttribute('he-headers')) headers = {...headers, ...JSON.parse(targetElement.getAttribute('he-headers'))}
+    if (element.hasAttribute('he-authentication')) {
+        headers['Authentication'] = element.getAttribute('he-authentication')
+    }
 
-    if(targetElement.hasAttribute('he-headers-storage')){
-        storageHeaders = JSON.parse(targetElement.getAttribute('he-headers-storage'))
+    if (element.hasAttribute('he-authorization')) {
+        headers['Authorization'] = element.getAttribute('he-authorization')
+    }
 
-        Object.entries(storageHeaders).forEach(([header, storage]) => storageHeaders[header] = localStorage.getItem(storage))
+    if (element.hasAttribute('he-headers')) {
+        try {
+            headers = {
+                ...headers,
+                ...JSON.parse(element.getAttribute('he-headers'))
+            }
+        } catch (error) {}
+    }
 
-        headers = {...headers, ...storageHeaders}
+    if (element.hasAttribute('he-headers-storage')) {
+        try {
+            const storageHeaders = JSON.parse(element.getAttribute('he-headers-storage'))
+
+            Object.entries(storageHeaders).forEach(([header, storage]) => {
+                storageHeaders[header] = localStorage.getItem(storage)
+            })
+
+            headers = {
+                ...headers,
+                ...storageHeaders
+            }
+        } catch (error) {}
+    }
+
+    const options = {
+        method,
+        headers
+    }
+
+    if (body && method != 'GET' && method != 'HEAD') {
+        options['body'] = JSON.stringify(body)
     }
 
     try {
-        const response = await fetch(url, {
-            method,
-            headers,
-            body: JSON.stringify(httpData)
-        })
+        const response = await fetch(url, options)
 
-        if(targetElement.hasAttribute('he-status-code')) {
-            if (response.status != targetElement.getAttribute('he-status-code')) {
-                const responseJson = await response.json()
-                if (responseJson.message) throw new Error(responseJson.message)
-                if (responseJson.msg) throw new Error(responseJson.msg)
-                if (responseJson.error) throw new Error(responseJson.error)
-                throw new Error(`${response.status} ${response.statusText}`)
-            }
+        if (
+            element.hasAttribute('he-status-code') &&
+            response.status != element.getAttribute('he-status-code')
+        ) {
+            const dataJson = await response.json()
+
+            if (dataJson.message) throw new Error(dataJson.message)
+            if (dataJson.msg) throw new Error(dataJson.msg)
+            if (dataJson.error) throw new Error(dataJson.error)
+            throw new Error(`${response.status} ${response.statusText}`)
         }
 
-        let responseData = null
+        let data = null
 
-        if(targetElement.hasAttribute('he-json')) responseData = await response.json()
-        else responseData = await response.text()
-
-        if(targetElement.hasAttribute('he-log')) {
-            console.log(`[http-event response]`, responseData);
-            console.log(`[http-event headers]`, headers);
-            console.log(`[http-event body]`, httpData);
+        if (element.hasAttribute('he-json')) {
+            data = await response.json()
+        } else {
+            data = await response.text()
         }
 
-        if(targetElement.hasAttribute('he-storage')) localStorage.setItem(targetElement.getAttribute('he-storage'), responseData)
-
-        if(targetElement.hasAttribute('he-run')){
-            eval(targetElement.getAttribute('he-run'))
+        if (element.hasAttribute('he-log')) {
+            console.log('[http-event response]', data);
+            console.log('[http-event headers]', headers);
+            console.log('[http-event body]', body);
         }
 
-        if(targetElement.hasAttribute('he-clear-inputs')){
-            const inputs = targetElement.querySelectorAll('input')
+        if (element.hasAttribute('he-storage')) {
+            localStorage.setItem(element.getAttribute('he-storage'), data)
+        }
+
+        if (element.hasAttribute('he-json') && element.hasAttribute('he-storage-json')) {
+            try {
+                const storageJson = JSON.parse(element.getAttribute('he-storage-json'))
+
+                Object.entries(storageJson).forEach(([storage, key]) => {
+                    localStorage.setItem(storage, data[key])
+                })
+            } catch (error) {}
+        }
+
+        if (element.hasAttribute('he-run')) {
+            eval(element.getAttribute('he-run'))
+        }
+
+        if (element.hasAttribute('he-clear-inputs')) {
+            const inputs = element.querySelectorAll('input')
 
             inputs.forEach(input => input.value = '')
         }
 
-        if(targetElement.hasAttribute('he-success-target')){
-            const successElement = httpEventGetElement(targetElement, targetElement.getAttribute('he-success-target'))
+        if (element.hasAttribute('he-success-target')) {
+            const successElement = httpEventGetElement(element, element.getAttribute('he-success-target'))
 
             if (successElement) {
-                let text = targetElement.getAttribute('he-success-text') || null
+                let text = element.getAttribute('he-success-text') || null
 
                 if (!text) {
-                    if (typeof responseData == 'object') {
-                        if (responseData.message) text = responseData.message
-                        else if (responseData.msg) text = responseData.msg
-                        else text = responseData
+                    if (typeof data == 'object') {
+                        if (data.message) text = data.message
+                        else if (data.msg) text = data.msg
+                        else text = data
                     } else {
                         try {
-                            const responseJson = JSON.parse(responseData)
-                            if (responseJson.message) text = responseJson.message
-                            else if (responseJson.msg) text = responseJson.msg
-                            else text = responseData
+                            const dataJson = JSON.parse(data)
+
+                            if (dataJson.message) text = dataJson.message
+                            else if (dataJson.msg) text = dataJson.msg
+                            else text = data
                         } catch (error) {
-                            text = responseData
+                            text = data
                         }
                     }
                 }
@@ -128,19 +175,21 @@ async function httpEventMethod(targetElement, eventName){
             }
         }
 
-        if (targetElement.hasAttribute('he-redirect')) window.location.href = targetElement.getAttribute('he-redirect')
+        if (element.hasAttribute('he-redirect')) {
+            window.location.href = element.getAttribute('he-redirect')
+        }
     } catch (error) {
-        if(targetElement.hasAttribute('he-log')) {
-            console.error(`[http-event error] ${error}`);
-            console.error(`[http-event headers]`, headers);
-            console.error(`[http-event body]`, httpData);
+        if (element.hasAttribute('he-log')) {
+            console.error('[http-event error]', error);
+            console.error('[http-event headers]', headers);
+            console.error('[http-event body]', body);
         }
 
-        if(targetElement.hasAttribute('he-error-target')){
-            const errorElement = httpEventGetElement(targetElement, targetElement.getAttribute('he-error-target'))
+        if (element.hasAttribute('he-error-target')) {
+            const errorElement = httpEventGetElement(element, element.getAttribute('he-error-target'))
 
             if (errorElement) {
-                const text = targetElement.getAttribute('he-error-text') || error.message
+                const text = element.getAttribute('he-error-text') || error.message
 
                 errorElement.innerText = text
             }
@@ -148,6 +197,23 @@ async function httpEventMethod(targetElement, eventName){
     }
 }
 
+function httpEvent(){
+    const elements = document.querySelectorAll('[he-event]:not([he-loaded])')
+
+    elements.forEach(httpEventLoad)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     httpEvent()
+
+    const httpEventMutationObserver = new MutationObserver(httpEvent)
+
+    httpEventMutationObserver.observe(document.body, {
+        attributes: true,
+        characterData: true,
+        childList: true,
+        subtree: true,
+        attributeOldValue: true,
+        characterDataOldValue: true
+    });
 })
