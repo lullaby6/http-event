@@ -132,7 +132,11 @@ async function httpEventMethod(element, eventName) {
         if (element.hasAttribute('he-log')) {
             console.log('[http-event response]', data);
             console.log('[http-event headers]', headers);
-            console.log('[http-event body]', body);
+
+            if (body && method != 'GET' && method != 'HEAD') {
+                console.log('[http-event body]', body);
+
+            }
         }
 
         if (element.hasAttribute('he-storage')) {
@@ -199,11 +203,18 @@ async function httpEventMethod(element, eventName) {
         if (element.hasAttribute('he-redirect')) {
             window.location.href = element.getAttribute('he-redirect')
         }
+
+        if (element.hasAttribute('he-open')) {
+            window.open(element.getAttribute('he-open'), '_blank')
+        }
     } catch (error) {
         if (element.hasAttribute('he-log')) {
             console.error('[http-event error]', error);
             console.error('[http-event headers]', headers);
-            console.error('[http-event body]', body);
+
+            if (body && method != 'GET' && method != 'HEAD') {
+                console.error('[http-event body]', body);
+            }
         }
 
         if (element.hasAttribute('he-error-target')) {
