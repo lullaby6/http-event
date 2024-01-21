@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>http-event.js</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/gh/lullaby6/lullaby-ui/cdn.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
+</head>
+<body class="min-h-screen flex tracking-wide relative overflow-x-hidden">
+    <div class="w-fit h-screen flex flex-col gap-1 border-r ly-border-light sticky top-0 left-0 px-16 pl-10 py-20">
+        <a class="ly-link text-nowrap" href="#basic">Basic usage</a>
+        <a class="ly-link text-nowrap" href="#install">Installation</a>
+        <a class="ly-link text-nowrap" href="#form">Forms</a>
+    </div>
+    <div class="w-full flex flex-col gap-10 px-40 py-20">
+
+        <!-- ----- -->
+        <!-- Title -->
+        <!-- ----- -->
+        <div class="flex flex-col gap-5">
+            <h1 class="ly-title text-4xl">http-event.js</h1>
+
+            <p class="ly-text leading-relaxed">
+                with <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">http-event.js</span> you can do http requests without any JavaScript
+                using the DOM events with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-event</span> attribute.
+            </p>
+        </div>
+
+        <!-- ------ -->
+        <!-- Basic -->
+        <!-- ------ -->
+        <div class="flex flex-col gap-5">
+            <h2 id="basic" class="ly-title">Basic usage</h1>
+
+            <pre><code class="language-html text-sm rounded">
+    &lt;button
+        he-event='click'
+        he-url='https://jsonplaceholder.typicode.com/todos/1'
+        he-method='GET'
+        he-log
+    &gt;
+        Click Me!
+    &lt;/button&gt;
+            </code></pre>
+
+            <p class="ly-text leading-relaxed">
+                with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-log</span> attribute the reponse data will be displayed in the console.
+            </p>
+
+            <div class="ly-card ly-flex-center w-full">
+                <button
+                he-event='click'
+                he-url='https://jsonplaceholder.typicode.com/todos/1'
+                he-method='GET'
+                he-log
+
+                class="ly-button"
+            >
+                Click Me!
+            </button>
+            </div>
+
+        </div>
+
+        <!-- ------------ -->
+        <!-- Installation -->
+        <!-- ------------ -->
+        <div class="flex flex-col gap-5">
+            <h2 id="install" class="ly-title">Installation</h1>
+
+            <p class="ly-text leading-relaxed">
+                Add this script tag in your html head to install the library or <a class="ly-link font-semibold" href="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js" target="_blank">Download</a> the .js file.
+            </p>
+
+            <pre><code class="language-html text-sm rounded">
+    &lt;script src="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js"&gt;&lt;/script&gt;
+            </code></pre>
+        </div>
+
+        <!-- ----- -->
+        <!-- Forms -->
+        <!-- ----- -->
+        <div class="flex flex-col gap-5">
+            <h2 id="form" class="ly-title">Forms</h1>
+
+            <pre><code class="language-html text-sm rounded">
+    &lt;form
+        he-event='submit'
+        he-url='http://localhost/api/auth/login'
+        he-method='POST'
+    &gt;
+        &lt;input type="email" name="email"&gt;
+        &lt;input type="password" name="password"&gt;
+        
+        &lt;button type="submit"&gt;Login&lt;/button&gt;
+    &lt;/form&gt;
+            </code></pre>
+
+            <p class="ly-text leading-relaxed">
+                when the form is submitted the request body will be the form data.
+            </p>
+
+            <h3 class="ly-title text-2xl">Target another form</h1>
+            
+            <pre><code class="language-html text-sm rounded">
+    &lt;form id='form-post'&gt;
+        &lt;input type="text" name="title"&gt;
+        &lt;input type="text" name="description"&gt;
+    &lt;/form&gt;
+
+    &lt;button
+        he-event='click'
+        he-url='http://localhost/api/post'
+        he-method='POST'
+        he-target-form='#form-post'
+    &gt;
+        Create Post
+    &lt;/button&gt;
+            </code></pre>
+
+            <p class="ly-text leading-relaxed">
+                with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-target-form</span> attribute the request body will be the form data of the closest query from the attribute value.
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>
