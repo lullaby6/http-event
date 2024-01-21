@@ -56,11 +56,11 @@ async function httpEventMethod(element, eventName) {
         } catch (error) {}
     }
 
-    if (element.hasAttribute('he-data')) {
+    if (element.hasAttribute('he-body')) {
         try {
             body = {
                 ...body,
-                ...JSON.parse(element.getAttribute('he-data'))
+                ...JSON.parse(element.getAttribute('he-body'))
             }
         } catch (error) {}
     }
