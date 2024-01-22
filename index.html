@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,37 +9,47 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/gh/lullaby6/lullaby-ui/cdn.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script>hljs.highlightAll();</script>
 
+    <script defer src="./viewport.js"></script>
+
 </head>
-<body class="min-h-screen flex tracking-wide relative overflow-x-hidden">
+<body id="intro" class="min-h-screen flex tracking-wide relative overflow-x-hidden">
     <div class="w-fit h-screen flex flex-col gap-1 border-r ly-border-light sticky top-0 left-0 px-16 pl-10 py-20">
-        <a class="ly-link text-nowrap" href="#basic">Basic usage</a>
-        <a class="ly-link text-nowrap" href="#install">Installation</a>
-        <a class="ly-link text-nowrap" href="#form">Forms</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#intro" viewport-trigger="intro">Introduction</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#basic" viewport-trigger="basic">Basic usage</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#install" viewport-trigger="install">Installation</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form" viewport-trigger="form">Form</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Body</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Headers</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Response</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Error</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Success</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Redirect</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Methods</a>
     </div>
     <div class="w-full flex flex-col gap-10 px-40 py-20">
 
-        <!-- ----- -->
-        <!-- Title -->
-        <!-- ----- -->
-        <div class="flex flex-col gap-5">
-            <h1 class="ly-title text-4xl">http-event.js</h1>
+        <!-- ------------ -->
+        <!-- Introduction -->
+        <!-- ------------ -->
+        <section viewport-name="intro" class="flex flex-col gap-5">
+            <h1 id="intro" class="ly-title text-4xl">http-event.js</h1>
 
             <p class="ly-text leading-relaxed">
                 with <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">http-event.js</span> you can do http requests without any JavaScript
                 using the DOM events with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-event</span> attribute.
             </p>
-        </div>
+        </section>
 
         <!-- ------ -->
         <!-- Basic -->
         <!-- ------ -->
-        <div class="flex flex-col gap-5">
+        <section viewport-name="basic" class="flex flex-col gap-5">
             <h2 id="basic" class="ly-title">Basic usage</h1>
 
             <pre><code class="language-html text-sm rounded">
@@ -70,12 +80,12 @@
             </button>
             </div>
 
-        </div>
+        </section>
 
         <!-- ------------ -->
         <!-- Installation -->
         <!-- ------------ -->
-        <div class="flex flex-col gap-5">
+        <section viewport-name="install" class="flex flex-col gap-5">
             <h2 id="install" class="ly-title">Installation</h1>
 
             <p class="ly-text leading-relaxed">
@@ -85,13 +95,13 @@
             <pre><code class="language-html text-sm rounded">
     &lt;script src="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js"&gt;&lt;/script&gt;
             </code></pre>
-        </div>
+        </section>
 
         <!-- ----- -->
         <!-- Forms -->
         <!-- ----- -->
-        <div class="flex flex-col gap-5">
-            <h2 id="form" class="ly-title">Forms</h1>
+        <section viewport-name="form" class="flex flex-col gap-5">
+            <h2 id="form" class="ly-title">Form</h1>
 
             <pre><code class="language-html text-sm rounded">
     &lt;form
@@ -131,7 +141,7 @@
             <p class="ly-text leading-relaxed">
                 with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-target-form</span> attribute the request body will be the form data of the closest query from the attribute value.
             </p>
-        </div>
+        </section>
 
     </div>
 </body>
