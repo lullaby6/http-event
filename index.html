@@ -34,7 +34,7 @@
         <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Redirect</a>
         <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Methods</a>
     </div>
-    <div class="w-full flex flex-col gap-10 px-40 py-20">
+    <div class="w-full flex flex-col gap-14 px-40 py-20">
 
         <!-- ------------ -->
         <!-- Introduction -->
@@ -54,21 +54,22 @@
         <section viewport-name="basic" class="flex flex-col gap-5">
             <h2 id="basic" class="ly-title">Basic usage</h1>
 
-            <pre class="relative">
-                <code class="language-html text-sm rounded">
-    &lt;button
-        he-event='click'
-        he-url='https://jsonplaceholder.typicode.com/todos/1'
-        he-method='GET'
-        he-log
-    &gt;
-        Click Me!
-    &lt;/button&gt;
-                </code>
-                <button copy="code" class="absolute top-3 right-2 translate-y-full text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
                     <iconify-icon icon="mingcute:copy-line"></iconify-icon>
                 </button>
-            </pre>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='https://jsonplaceholder.typicode.com/todos/1'
+    he-method='GET'
+    he-log
+  &gt;
+    Click Me!
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+
 
             <p class="ly-text leading-relaxed">
                 with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-log</span> attribute the reponse data will be displayed in the console.
@@ -99,14 +100,14 @@
                 Add this script tag in your html head to install the library or <a class="ly-link font-semibold" href="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js" target="_blank">Download</a> the .js file.
             </p>
 
-            <pre class="relative">
-                <code class="language-html text-sm rounded">
-    &lt;script src='https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js'&gt;&lt;/script&gt;
-                </code>
-                <button copy="code" class="absolute top-3 right-2 translate-y-full text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
                     <iconify-icon icon="mingcute:copy-line"></iconify-icon>
                 </button>
-            </pre>
+                <pre><code class="language-html text-sm rounded">
+  &lt;script src='https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js'&gt;&lt;/script&gt;
+                </code></pre>
+            </div>
         </section>
 
         <!-- ----- -->
@@ -115,23 +116,23 @@
         <section viewport-name="form" class="flex flex-col gap-5">
             <h2 id="form" class="ly-title">Form</h1>
 
-            <pre class="relative">
-                <code class="language-html text-sm rounded">
-    &lt;form
-        he-event='submit'
-        he-url='http://localhost/api/auth/login'
-        he-method='POST'
-    &gt;
-        &lt;input type="email" name="email"&gt;
-        &lt;input type="password" name="password"&gt;
-        
-        &lt;button type="submit"&gt;Login&lt;/button&gt;
-    &lt;/form&gt;
-                </code>
-                <button copy="code" class="absolute top-3 right-2 translate-y-full text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
                     <iconify-icon icon="mingcute:copy-line"></iconify-icon>
                 </button>
-            </pre>
+                <pre><code class="language-html text-sm rounded">
+  &lt;form
+    he-event='submit'
+    he-url='http://localhost/api/auth/login'
+    he-method='POST'
+  &gt;
+    &lt;input type="email" name="email"&gt;
+    &lt;input type="password" name="password"&gt;
+        
+    &lt;button type="submit"&gt;Login&lt;/button&gt;
+  &lt;/form&gt;
+                </code></pre>
+            </div>
 
             <p class="ly-text leading-relaxed">
                 when the form is submitted the request body will be the form data.
@@ -139,26 +140,26 @@
 
             <h3 class="ly-title text-2xl">Target another form</h1>
             
-            <pre class="relative">
-                <code class="language-html text-sm rounded">
-    &lt;form id='form-post'&gt;
-        &lt;input type="text" name="title"&gt;
-        &lt;input type="text" name="description"&gt;
-    &lt;/form&gt;
-
-    &lt;button
-        he-event='click'
-        he-url='http://localhost/api/post'
-        he-method='POST'
-        he-target-form='#form-post'
-    &gt;
-        Create Post
-    &lt;/button&gt;
-                </code>
-                <button copy="code" class="absolute top-3 right-2 translate-y-full text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
                     <iconify-icon icon="mingcute:copy-line"></iconify-icon>
                 </button>
-            </pre>
+                <pre><code class="language-html text-sm rounded">
+  &lt;form id='form-post'&gt;
+        &lt;input type="text" name="title"&gt;
+        &lt;input type="text" name="description"&gt;
+  &lt;/form&gt;
+
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+    he-target-form='#form-post'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
 
             <p class="ly-text leading-relaxed">
                 with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-target-form</span> attribute the request body will be the form data of the closest query from the attribute value.
