@@ -11,7 +11,8 @@ function copyGetElement(element, query) {
 
     if (!targetSelector) targetSelector = element.querySelector(query)
     if (!targetSelector) targetSelector = element.closest(query)
-    if (!targetSelector) targetSelector = element.parentElement.querySelector(query)
+    if (!targetSelector && element.parentElement) targetSelector = element.parentElement.querySelector(query)
+    if (!targetSelector && element.parentElement && element.parentElement.parentElement) targetSelector = element.parentElement.parentElement.querySelector(query)
     if (!targetSelector) targetSelector = document.querySelector(query)
 
     return targetSelector
