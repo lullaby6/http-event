@@ -251,6 +251,15 @@ async function httpEventMethod(element, eventName) {
             } catch (error) {}
         }
 
+        if (element.hasAttribute('he-attr')) {
+            if (element.hasAttribute('he-attr-target')) {
+                const target = httpEventGetElement(element, element.getAttribute('he-attr-target'))
+                target.setAttribute(element.getAttribute('he-attr'), data)
+            } else {
+                element.setAttribute(element.getAttribute('he-attr'), data)
+            }
+        }
+
         if (element.hasAttribute('he-attr-json')) {
             try {
                 const attrJson = JSON.parse(element.getAttribute('he-attr-json'))
@@ -259,15 +268,6 @@ async function httpEventMethod(element, eventName) {
                     element.setAttribute(attr, data[key])
                 })
             } catch (error) {}
-        }
-
-        if (element.hasAttribute('he-attr')) {
-            if (element.hasAttribute('he-attr-target')) {
-                const target = httpEventGetElement(element, element.getAttribute('he-attr-target'))
-                target.setAttribute(element.getAttribute('he-attr'), data)
-            } else {
-                element.setAttribute(element.getAttribute('he-attr'), data)
-            }
         }
 
         if (element.hasAttribute('he-run')) {
