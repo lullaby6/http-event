@@ -198,6 +198,63 @@
   &lt;/button&gt;
                 </code></pre>
             </div>
+
+            <div class="flex flex-col gap-2">
+                <h3 class="ly-title text-2xl">Set body from attributes</h3>
+
+                <p class="ly-text leading-relaxed">
+                    You can set body props from the element attributes using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body-attr</span> attribute.
+                </p>
+            </div>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    post-title="My Post..."
+    post-desc="My Description..."
+    he-body-attr='{"title": "post-title", "description": "post-desc"}'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <h3 class="ly-title text-2xl">Set body from localStorage</h3>
+
+                <p class="ly-text leading-relaxed">
+                    You can set body props from the localStorage using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body-storage</span> attribute.
+                </p>
+            </div>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;script&gt;
+    localStorage.setItem('post_title', 'My Post...')
+    localStorage.setItem('post_desc', 'My Description...')
+  &lt;/script&gt;
+
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    he-body-storage='{"title": "post_title", "description": "post_desc"}'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
         </section>
 
         <!-- ------- -->
@@ -252,6 +309,32 @@
     he-method='POST'
 
     he-headers-storage='{"Authorization": "session"}'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <h3 class="ly-title text-2xl">Set headers from attributes</h3>
+
+                <p class="ly-text leading-relaxed">
+                    You can set headers from element attributes using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-headers-attr</span> attribute.
+                </p>
+            </div>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    content-type='text/plain'
+    he-headers-attr='{"Content-Type": "content-type"}'
   &gt;
     Create Post
   &lt;/button&gt;
