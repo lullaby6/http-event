@@ -35,12 +35,64 @@ async function httpEventMethod(element, eventName) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
+
     let body = {}
+
+    if (element.hasAttribute('he-body')) {
+        try {
+            body = {
+                ...body,
+                ...JSON.parse(element.getAttribute('he-body'))
+            }
+        } catch (error) {}
+    }
+
+    if (element.hasAttribute('he-body-storage')) {
+        try {
+            const bodyStorage = JSON.parse(element.getAttribute('he-body-storage'))
+
+            Object.entries(bodyStorage).forEach(([data, storage]) => {
+                if (localStorage.getItem(storage) != null) {
+                    bodyStorage[data] = localStorage.getItem(storage)
+                } else {
+                    delete bodyStorage[data]
+                }
+            })
+
+            body = {
+                ...body,
+                ...bodyStorage
+            }
+        } catch (error) {}
+    }
+
+    if (element.hasAttribute('he-body-attr')) {
+        try {
+            const bodyAttrs = JSON.parse(element.getAttribute('he-body-storage'))
+
+            Object.entries(bodyAttrs).forEach(([data, attr]) => {
+                if (element.hasAttribute(attr)) {
+                    bodyAttrs[data] = element.getAttribute(attr)
+                } else {
+                    delete bodyAttrs[data]
+                }
+            })
+
+            body = {
+                ...body,
+                ...bodyAttrs
+            }
+        } catch (error) {}
+    }
 
     if (eventName == 'submit') {
         try {
             const formData = new FormData(element)
-            body = Object.fromEntries(formData)
+            const formDataObj = Object.fromEntries(formData)
+            body = {
+                ...body,
+                ...formDataObj
+            }
         } catch (error) {}
     }
 
@@ -56,23 +108,6 @@ async function httpEventMethod(element, eventName) {
         } catch (error) {}
     }
 
-    if (element.hasAttribute('he-body')) {
-        try {
-            body = {
-                ...body,
-                ...JSON.parse(element.getAttribute('he-body'))
-            }
-        } catch (error) {}
-    }
-
-    if (element.hasAttribute('he-authentication')) {
-        headers['Authentication'] = element.getAttribute('he-authentication')
-    }
-
-    if (element.hasAttribute('he-authorization')) {
-        headers['Authorization'] = element.getAttribute('he-authorization')
-    }
-
     if (element.hasAttribute('he-headers')) {
         try {
             headers = {
@@ -84,17 +119,80 @@ async function httpEventMethod(element, eventName) {
 
     if (element.hasAttribute('he-headers-storage')) {
         try {
-            const storageHeaders = JSON.parse(element.getAttribute('he-headers-storage'))
+            const headersStorage = JSON.parse(element.getAttribute('he-headers-storage'))
 
-            Object.entries(storageHeaders).forEach(([header, storage]) => {
-                storageHeaders[header] = localStorage.getItem(storage)
+            Object.entries(headersStorage).forEach(([header, storage]) => {
+                if (localStorage.getItem(storage) != null) {
+                    headersStorage[header] = localStorage.getItem(storage)
+                } else {
+                    delete headersStorage[header]
+                }
             })
 
             headers = {
                 ...headers,
-                ...storageHeaders
+                ...headersStorage
             }
         } catch (error) {}
+    }
+
+    if (element.hasAttribute('he-headers-attr')) {
+        try {   
+            const headersAttrs = JSON.parse(element.getAttribute('he-headers-attr'))
+
+            Object.entries(headersAttrs).forEach(([header, attr]) => {
+                if (element.hasAttribute(attr)) {
+                    headersAttrs[header] = element.getAttribute(attr)
+                } else {
+                    delete headersAttrs[header]
+                }
+
+                headers = {
+                    ...headers,
+                    ...headersAttrs
+                }
+            })
+        } catch (error) {}
+    }
+
+    if (element.hasAttribute('he-accept')) {
+        headers['Accept'] = element.getAttribute('he-accept')
+    }
+
+    if (element.hasAttribute('he-encoding')) {
+        headers['Accept-Encoding'] = element.getAttribute('he-encoding')
+    }
+
+    if (element.hasAttribute('he-content-type')) {
+        headers['Content-Type'] = element.getAttribute('he-content-type')
+    }
+
+    if (element.hasAttribute('he-form-data') || headers['Content-Type'] == 'multipart/form-data') {
+        headers['Content-Type'] = 'multipart/form-data'
+
+        if (body && Object.keys(body).length > 0) {
+            body = new FormData()
+
+            Object.entries(body).forEach(([key, value]) => 
+                formData.append(key, value)
+            );
+        }
+    }
+
+    if (element.hasAttribute('he-form-urlencoded') || headers['Content-Type'] == 'application/x-www-form-urlencoded') {
+        headers['Content-Type'] = 'application/x-www-form-urlencoded'
+
+        if (body && Object.keys(body).length > 0) {
+            body = new URLSearchParams(Object.entries(body)).toString();
+        }
+    }
+
+    if (element.hasAttribute('he-authentication')) {
+        headers['Authentication'] = element.getAttribute('he-authentication')
+    }
+
+    if (element.hasAttribute('he-authorization')) {
+        headers['Authorization'] = element.getAttribute('he-authorization')
     }
 
     const options = {
@@ -102,7 +200,7 @@ async function httpEventMethod(element, eventName) {
         headers
     }
 
-    if (body && method != 'GET' && method != 'HEAD') {
+    if (body && Object.keys(body).length > 0 && method != 'GET' && method != 'HEAD') {
         options['body'] = JSON.stringify(body)
     }
 
@@ -149,6 +247,16 @@ async function httpEventMethod(element, eventName) {
 
                 Object.entries(storageJson).forEach(([storage, key]) => {
                     localStorage.setItem(storage, data[key])
+                })
+            } catch (error) {}
+        }
+
+        if (element.hasAttribute('he-attr-json')) {
+            try {
+                const attrJson = JSON.parse(element.getAttribute('he-attr-json'))
+
+                Object.entries(attrJson).forEach(([attr, key]) => {
+                    element.setAttribute(attr, data[key])
                 })
             } catch (error) {}
         }
