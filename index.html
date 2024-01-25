@@ -26,13 +26,13 @@
         <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#basic" viewport-trigger="basic">Basic usage</a>
         <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#install" viewport-trigger="install">Installation</a>
         <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form" viewport-trigger="form">Form</a>
-        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Body</a>
-        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Headers</a>
-        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Response</a>
-        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Error</a>
-        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Success</a>
-        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Redirect</a>
-        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#form">Methods</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#body" viewport-trigger="body">Body</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#headers" viewport-trigger="headers">Headers</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#res" viewport-trigger="res">Response</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#error" viewport-trigger="error">Error</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#success" viewport-trigger="success">Success</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#redirect" viewport-trigger="redirect">Redirect</a>
+        <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#methods" viewport-trigger="methods">Methods</a>
     </div>
     <div class="w-full flex flex-col gap-14 px-40 py-20">
 
@@ -52,7 +52,7 @@
         <!-- Basic -->
         <!-- ------ -->
         <section viewport-name="basic" class="flex flex-col gap-5">
-            <h2 id="basic" class="ly-title">Basic usage</h1>
+            <h2 id="basic" class="ly-title">Basic usage</h2>
 
             <div class="relative">
                 <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
@@ -94,11 +94,14 @@
         <!-- Installation -->
         <!-- ------------ -->
         <section viewport-name="install" class="flex flex-col gap-5">
-            <h2 id="install" class="ly-title">Installation</h1>
+            <div class="flex flex-col gap-2">
+                <h2 id="install" class="ly-title">Installation</h2>
 
-            <p class="ly-text leading-relaxed">
-                Add this script tag in your html head to install the library or <a class="ly-link font-semibold" href="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js" target="_blank">Download</a> the .js file.
-            </p>
+                <p class="ly-text leading-relaxed">
+                    Add this script tag in your html head to install the library or <a class="ly-link font-semibold" href="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js" target="_blank">Download</a> the .js file.
+                </p>
+            </div>
+
 
             <div class="relative">
                 <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
@@ -114,7 +117,7 @@
         <!-- Forms -->
         <!-- ----- -->
         <section viewport-name="form" class="flex flex-col gap-5">
-            <h2 id="form" class="ly-title">Form</h1>
+            <h2 id="form" class="ly-title">Form</h2>
 
             <div class="relative">
                 <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
@@ -138,7 +141,7 @@
                 when the form is submitted the request body will be the form data.
             </p>
 
-            <h3 class="ly-title text-2xl">Target another form</h1>
+            <h3 class="ly-title text-2xl">Target another form</h3>
             
             <div class="relative">
                 <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
@@ -154,6 +157,7 @@
     he-event='click'
     he-url='http://localhost/api/post'
     he-method='POST'
+
     he-target-form='#form-post'
   &gt;
     Create Post
@@ -164,6 +168,190 @@
             <p class="ly-text leading-relaxed">
                 with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-target-form</span> attribute the request body will be the form data of the closest query from the attribute value.
             </p>
+        </section>
+
+        <!-- ---- -->
+        <!-- Body -->
+        <!-- ---- -->
+        <section viewport-name="body" class="flex flex-col gap-5">
+            <div class="flex flex-col gap-2">
+                <h2 id="body" class="ly-title">Body</h2>
+
+                <p class="ly-text leading-relaxed">
+                    with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body</span> attribute the request body will be the value of the attribute but the value don't override or overwrite any form data.
+                </p>
+            </div>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    he-body='{"title": "My Post...", "description": "My Description..."}'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+        </section>
+
+        <!-- ------- -->
+        <!-- Headers -->
+        <!-- ------- -->
+        <section viewport-name="headers" class="flex flex-col gap-5">
+            <div class="flex flex-col gap-2">
+                <h2 id="headers" class="ly-title">Headers</h2>
+
+                <p class="ly-text leading-relaxed">
+                    with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-headers</span> attribute the request headers will be the value of the attribute.
+                </p>
+            </div>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    he-headers='{"Content-Type": "text/plain"}'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <h3 class="ly-title text-2xl">Set headers from localStorage</h3>
+
+                <p class="ly-text leading-relaxed">
+                    You can set headers from localStorage using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-headers-storage</span> attribute.
+                </p>
+            </div>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;script&gt;
+    console.log(localStorage.session) // output: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+  &lt;/script&gt;
+
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    he-headers-storage='{"Authorization": "session"}'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <h3 class="ly-title text-2xl">Headers attributes</h3>
+
+                <p class="ly-text leading-relaxed">
+                    You can set the common headers with this attributes:
+                </p>
+
+                <ul class="ly-text leading-relaxed flex flex-col gap-1 pl-6">
+                    <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-accept</span></li>
+                    <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-encoding</span></li>
+                    <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-content-type</span></li>
+                    <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-authentication</span></li>
+                    <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-authorization</span></li>
+                </ul>
+            </div>
+
+            <h3 class="ly-title text-xl">Example:</h3>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    he-accept='text/html'
+    he-encoding='utf-8'
+    he-content-type='application/json'
+    he-authentication='Beaber token...'
+    he-authorization='Bearer token...'
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <h3 class="ly-title text-2xl">Form data</h3>
+
+                <p class="ly-text leading-relaxed">
+                    You can use the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-form-data</span> attribute to send form data istead of JSON.
+                    All the data of the request body will be converted to form data.
+                </p>
+            </div>
+
+            <h3 class="ly-title text-xl">Example:</h3>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    he-form-data
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <h3 class="ly-title text-2xl">Form URLEncoded</h3>
+
+                <p class="ly-text leading-relaxed">
+                    You can use the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-form-urlencoded</span> attribute to convert the body in a query-string value.
+                    Like <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">{"key1": "value1", "key2": "value2"}</span> to <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">"key1=value1&key2=value2"</span>.
+                </p>
+            </div>
+
+            <h3 class="ly-title text-xl">Example:</h3>
+
+            <div class="relative">
+                <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                    <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                </button>
+                <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='http://localhost/api/post'
+    he-method='POST'
+
+    he-form-urlencoded
+  &gt;
+    Create Post
+  &lt;/button&gt;
+                </code></pre>
+            </div>
         </section>
 
     </div>
