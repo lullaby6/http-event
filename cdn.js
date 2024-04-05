@@ -137,7 +137,7 @@ async function httpEventMethod(element, eventName) {
     }
 
     if (element.hasAttribute('he-headers-attr')) {
-        try {   
+        try {
             const headersAttrs = JSON.parse(element.getAttribute('he-headers-attr'))
 
             Object.entries(headersAttrs).forEach(([header, attr]) => {
@@ -173,7 +173,7 @@ async function httpEventMethod(element, eventName) {
         if (body && Object.keys(body).length > 0) {
             body = new FormData()
 
-            Object.entries(body).forEach(([key, value]) => 
+            Object.entries(body).forEach(([key, value]) =>
                 formData.append(key, value)
             );
         }
@@ -216,7 +216,7 @@ async function httpEventMethod(element, eventName) {
             if (dataJson.message) throw new Error(dataJson.message)
             if (dataJson.msg) throw new Error(dataJson.msg)
             if (dataJson.error) throw new Error(dataJson.error)
-            throw new Error(`${response.status} ${response.statusText}`)
+            throw new Error(`Expected status code ${element.getAttribute('he-status-code')}, got ${response.status} - ${response.statusText}`)
         }
 
         let data = null
@@ -337,7 +337,7 @@ async function httpEventMethod(element, eventName) {
     }
 }
 
-function httpEvent(){
+function httpEvent() {
     const elements = document.querySelectorAll('[he-event]:not([he-loaded])')
 
     elements.forEach(httpEventLoad)
