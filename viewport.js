@@ -9,7 +9,7 @@ function detectViewport() {
         const elementY = element.getBoundingClientRect().top - document.body.getBoundingClientRect().top
 
         const distance = Math.abs(elementY - window.scrollY)
-        
+
         if (distance < minDistance) {
             minDistance = distance
             minDistanceElement = element
@@ -20,7 +20,7 @@ function detectViewport() {
         const name = minDistanceElement.getAttribute('viewport-name')
         const triggers = document.querySelectorAll(`[viewport-trigger="${name}"]`)
         const otherTriggers = document.querySelectorAll(`[viewport-trigger]:not([viewport-trigger="${name}"])`)
-        
+
         otherTriggers.forEach(trigger => trigger.removeAttribute('in-viewport'))
         triggers.forEach(trigger => trigger.setAttribute('in-viewport', ''))
     }

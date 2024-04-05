@@ -34,7 +34,7 @@
         <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#redirect" viewport-trigger="redirect">Redirect</a>
         <a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href="#methods" viewport-trigger="methods">Methods</a>
     </div>
-    <div class="w-full flex flex-col gap-14 px-40 py-20">
+    <div class="w-full flex flex-col gap-16 px-40 py-20">
 
         <!-- ------------ -->
         <!-- Introduction -->
@@ -42,7 +42,7 @@
         <section viewport-name="intro" class="flex flex-col gap-5">
             <h1 id="intro" class="ly-title text-4xl">http-event.js</h1>
 
-            <p class="ly-text leading-relaxed">
+            <p class="ly-text">
                 with <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">http-event.js</span> you can do http requests without any JavaScript
                 using the DOM events with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-event</span> attribute.
             </p>
@@ -71,21 +71,21 @@
             </div>
 
 
-            <p class="ly-text leading-relaxed">
+            <p class="ly-text">
                 with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-log</span> attribute the reponse data will be displayed in the console.
             </p>
 
             <div class="ly-card ly-flex-center w-full">
                 <button
-                he-event='click'
-                he-url='https://jsonplaceholder.typicode.com/todos/1'
-                he-method='GET'
-                he-log
+                    he-event='click'
+                    he-url='https://jsonplaceholder.typicode.com/todos/1'
+                    he-method='GET'
+                    he-log
 
-                class="ly-button"
-            >
-                Click Me!
-            </button>
+                    class="ly-button"
+                >
+                    Click Me!
+                </button>
             </div>
 
         </section>
@@ -97,7 +97,7 @@
             <div class="flex flex-col gap-2">
                 <h2 id="install" class="ly-title">Installation</h2>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     Add this script tag in your html head to install the library or <a class="ly-link font-semibold" href="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js" target="_blank">Download</a> the .js file.
                 </p>
             </div>
@@ -137,7 +137,7 @@
                 </code></pre>
             </div>
 
-            <p class="ly-text leading-relaxed">
+            <p class="ly-text">
                 when the form is submitted the request body will be the form data.
             </p>
 
@@ -165,7 +165,7 @@
                 </code></pre>
             </div>
 
-            <p class="ly-text leading-relaxed">
+            <p class="ly-text">
                 with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-target-form</span> attribute the request body will be the form data of the closest query from the attribute value.
             </p>
         </section>
@@ -177,7 +177,7 @@
             <div class="flex flex-col gap-2">
                 <h2 id="body" class="ly-title">Body</h2>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body</span> attribute the request body will be the value of the attribute but the value don't override or overwrite any form data.
                 </p>
             </div>
@@ -202,7 +202,7 @@
             <div class="flex flex-col gap-2">
                 <h3 class="ly-title text-2xl">Set body from attributes</h3>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     You can set body props from the element attributes using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body-attr</span> attribute.
                 </p>
             </div>
@@ -229,7 +229,7 @@
             <div class="flex flex-col gap-2">
                 <h3 class="ly-title text-2xl">Set body from localStorage</h3>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     You can set body props from the localStorage using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body-storage</span> attribute.
                 </p>
             </div>
@@ -264,7 +264,7 @@
             <div class="flex flex-col gap-2">
                 <h2 id="headers" class="ly-title">Headers</h2>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-headers</span> attribute the request headers will be the value of the attribute.
                 </p>
             </div>
@@ -289,7 +289,7 @@
             <div class="flex flex-col gap-2">
                 <h3 class="ly-title text-2xl">Set headers from localStorage</h3>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     You can set headers from localStorage using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-headers-storage</span> attribute.
                 </p>
             </div>
@@ -318,7 +318,7 @@
             <div class="flex flex-col gap-2">
                 <h3 class="ly-title text-2xl">Set headers from attributes</h3>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     You can set headers from element attributes using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-headers-attr</span> attribute.
                 </p>
             </div>
@@ -344,11 +344,11 @@
             <div class="flex flex-col gap-2">
                 <h3 class="ly-title text-2xl">Headers attributes</h3>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     You can set the common headers with this attributes:
                 </p>
 
-                <ul class="ly-text leading-relaxed flex flex-col gap-1 pl-6">
+                <ul class="ly-text flex flex-col gap-1 pl-6">
                     <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-accept</span></li>
                     <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-encoding</span></li>
                     <li>- <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt w-fit">he-content-type</span></li>
@@ -383,7 +383,7 @@
             <div class="flex flex-col gap-2">
                 <h3 class="ly-title text-2xl">Form data</h3>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     You can use the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-form-data</span> attribute to send form data istead of JSON.
                     All the data of the request body will be converted to form data.
                 </p>
@@ -411,7 +411,7 @@
             <div class="flex flex-col gap-2">
                 <h3 class="ly-title text-2xl">Form URLEncoded</h3>
 
-                <p class="ly-text leading-relaxed">
+                <p class="ly-text">
                     You can use the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-form-urlencoded</span> attribute to convert the body in a query-string value.
                     Like <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">{"key1": "value1", "key2": "value2"}</span> to <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">"key1=value1&key2=value2"</span>.
                 </p>
@@ -437,6 +437,124 @@
             </div>
         </section>
 
+        <!-- --------- -->
+        <!-- Resoponse -->
+        <!-- --------- -->
+        <section viewport-name="res" class="flex flex-col gap-8">
+            <h2 id="res" class="ly-title">Response</h2>
+
+            <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-2">
+                    <h3 class="ly-title text-2xl">Status Code</h3>
+
+                    <p class="ly-text">
+                        You can use the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-status-code</span> attribute to set an expected response code, if the response code is not expected, the response will be considered as wrong.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+
+                    <h3 class="ly-title text-xl">Example:</h3>
+
+                    <div class="relative">
+                        <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                            <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                        </button>
+                        <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='https://jsonplaceholder.typicode.com/todos/1'
+    he-method='GET'
+    he-log
+
+    he-status-code='503'
+  &gt;
+    Click Me!
+  &lt;/button&gt;
+                        </code></pre>
+                    </div>
+                </div>
+
+                <p class="ly-text">
+                    an error will be displayed in the console because the response code is 200 not 503
+                </p>
+
+                <div class="ly-card ly-flex-center w-full">
+                    <button
+                        he-event='click'
+                        he-url='https://jsonplaceholder.typicode.com/todos/1'
+                        he-method='GET'
+                        he-log
+
+                        he-status-code='503'
+
+                        class="ly-button"
+                    >
+                        Click Me!
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-5">
+                <div class="flex flex-col gap-2">
+                    <h3 class="ly-title text-2xl">JSON</h3>
+
+                    <p class="ly-text">
+                        You can use the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-json</span> attribute to try parse the response data into a json (object), if the response is not a json, the response will be considered as wrong and throw an error,
+                        if you want that when you try to parse the response to json it does not throw error, you can use <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-safe-json</span>.
+                    </p>
+                </div>
+
+                <div class="flex flex-col gap-3">
+
+                    <h3 class="ly-title text-xl">Example:</h3>
+
+                    <div class="relative">
+                        <button copy="code" class="absolute top-0 right-0 m-2 text-white text-xl opacity-25 hover:opacity-100 transition-opacity cursor-pointer w-fit h-fit ly-flex-center">
+                            <iconify-icon icon="mingcute:copy-line"></iconify-icon>
+                        </button>
+                        <pre><code class="language-html text-sm rounded">
+  &lt;button
+    he-event='click'
+    he-url='https://jsonplaceholder.typicode.com/todos/1'
+    he-method='GET'
+    he-log
+
+    he-json
+  &gt;
+    Click Me!
+  &lt;/button&gt;
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="flex flex-col gap-5">
+            <h2 id="res" class="ly-title">Doc To Do</h2>
+            <ul class="ly-card w-full grid grid-cols-4">
+                <li>he-storage</li>
+                <li>he-storage-json</li>
+                <li>he-attr</li>
+                <li>he-attr-target</li>
+                <li>he-attr-json</li>
+                <li>he-run</li>
+                <li>he-clear-inputs</li>
+                <li>he-success-target</li>
+                <li>he-success-text</li>
+                <li>he-redirect</li>
+                <li>he-open</li>
+                <li>he-error-target</li>
+                <li>he-error-text</li>
+                <li>he-run-event</li>
+                <li>he-window-event</li>
+                <li>he-success-event</li>
+                <li>he-window-success-event</li>
+                <li>he-error-event</li>
+                <li>he-window-error-event</li>
+            </ul>
+        </section>
     </div>
 </body>
 </html>
