@@ -222,18 +222,26 @@ async function httpEventMethod(element, eventName) {
         let data = null
 
         if (element.hasAttribute('he-json')) {
-            data = await response.json()
+            try {
+                data = await response.json()
+            } catch (error) {
+                throw new Error('Error on parsing the response data into json')
+            }
+        } else if (element.hasAttribute('he-safe-json')) {
+            try {
+                data = await response.json()
+            } catch (error) {}
         } else {
             data = await response.text()
         }
 
         if (element.hasAttribute('he-log')) {
-            console.log('[http-event response]', data);
+            console.log('[http-event response]', response);
+            console.log('[http-event response data]', data);
             console.log('[http-event headers]', headers);
 
             if (body && method != 'GET' && method != 'HEAD') {
                 console.log('[http-event body]', body);
-
             }
         }
 
@@ -248,7 +256,10 @@ async function httpEventMethod(element, eventName) {
                 Object.entries(storageJson).forEach(([storage, key]) => {
                     localStorage.setItem(storage, data[key])
                 })
-            } catch (error) {}
+            } catch (error) {
+                throw new Error('Error on parsing the response data into json to store in local storage')
+
+            }
         }
 
         if (element.hasAttribute('he-attr')) {
