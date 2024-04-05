@@ -326,6 +326,14 @@ async function httpEventMethod(element, eventName) {
         if (element.hasAttribute('he-open')) {
             window.open(element.getAttribute('he-open'), '_blank')
         }
+
+        if (element.hasAttribute('he-success-event')) {
+            element.dispatchEvent(new Event(element.getAttribute('he-success-event')))
+        }
+
+        if (element.hasAttribute('he-window-success-event')) {
+            window.dispatchEvent(new Event(element.getAttribute('he-window-success-event')))
+        }
     } catch (error) {
         if (element.hasAttribute('he-log')) {
             console.error('[http-event error]', error);
@@ -345,6 +353,22 @@ async function httpEventMethod(element, eventName) {
                 errorElement.innerText = text
             }
         }
+
+        if (element.hasAttribute('he-error-event')) {
+            element.dispatchEvent(new Event(element.getAttribute('he-error-event')))
+        }
+
+        if (element.hasAttribute('he-window-error-event')) {
+            window.dispatchEvent(new Event(element.getAttribute('he-window-error-event')))
+        }
+    }
+
+    if (element.hasAttribute('he-run-event')) {
+        element.dispatchEvent(new Event(element.getAttribute('he-run-event')))
+    }
+
+    if (element.hasAttribute('he-window-event')) {
+        window.dispatchEvent(new Event(element.getAttribute('he-window-event')))
     }
 }
 
