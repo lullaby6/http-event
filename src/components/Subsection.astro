@@ -1,0 +1,41 @@
+---
+interface Props {
+	id?: string;
+	title?: string;
+	desc?: string;
+	code?: string;
+    sectionClassName?: string;
+    titleClassName?: string;
+    descClassName?: string;
+    codeClassName?: string;
+}
+
+const { id, title, desc, code, sectionClassName, titleClassName, descClassName, codeClassName } = Astro.props;
+
+import Code  from '@/components/Code.astro';
+---
+
+<section id={id} class={`${sectionClassName} flex flex-col gap-5`}>
+    {(title || desc) && 
+        <div class="flex flex-col gap-2">
+            {title && <h2 class={`${titleClassName} ly-title text-2xl`}>{title}</h2>}
+
+            <slot name="title" />
+
+            {desc && <p class={`${descClassName} ly-text`}>{desc}</p>}
+
+            <slot name="desc" />
+        </div>
+    }
+
+
+    <slot name="code" />
+
+    {code && 
+        <div class={`${codeClassName} rounded overflow-hidden`}>
+            <Code code={code} />
+        </div>
+    }
+
+    <slot/>
+</section>

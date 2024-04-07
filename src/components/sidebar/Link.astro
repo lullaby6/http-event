@@ -1,0 +1,10 @@
+---
+interface Props {
+	text: string;
+	target: string;
+}
+
+const { text, target } = Astro.props;
+---
+
+<a class="ly-link text-nowrap opacity-50 hover:opacity-100 transition-opacity [&[in-viewport]]:opacity-100" href=`${target}` viewport=`${target}`>{text}</a>

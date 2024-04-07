@@ -1,0 +1,184 @@
+---
+import Layout from '@/layouts/Layout.astro';
+
+import Sidebar from '@/components/Sidebar.astro';
+import Section from '@/components/Section.astro';
+import Subsection from '@/components/Subsection.astro';
+---
+
+<Layout title="http-sevent.js Docs">
+	<main class="w-full h-screen flex overflow-x-hidden tracking-wide">
+		<Sidebar/>
+
+		<div viewport-scroll class="w-full h-screen overflow-y-scroll flex flex-col gap-16 px-40 py-20">
+			<Section 
+				id="intro" 
+				title="http-event.js"	
+
+				titleClassName='text-4xl'
+			>
+				<p class="ly-text">
+					with <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">http-event.js</span> you can do http requests without any JavaScript
+					using the DOM events with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-event</span> attribute.
+				</p>
+			</Section>
+
+			<Section
+				id='basic'
+				title='Basic usage'
+				code={`
+    <button
+		he-event="click"
+		he-url="https://jsonplaceholder.typicode.com/todos/1"
+		he-method="GET"
+		he-log
+    >
+    	Click Me!
+    </button>
+				`}
+			>
+				<p class="ly-text">
+					with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-log</span> attribute the reponse data will be displayed in the console.
+				</p>
+			
+				<div class="ly-card ly-flex-center w-full">
+					<button
+						he-event='click'
+						he-url='https://jsonplaceholder.typicode.com/todos/1'
+						he-method='GET'
+						he-log
+			
+						class="ly-button"
+					>
+						Click Me!
+					</button>
+				</div>
+			</Section>
+
+			<Section
+				id='install'
+				title='Installation'
+				code={`
+	<script src="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.j"></script>
+				`}
+		>
+				<p slot="title" class="ly-text">
+					Add this script tag in your html head to install the library or <a class="underline" href="https://cdn.jsdelivr.net/gh/lullaby6/http-event.js/cdn.min.js" target="_blank">Download</a> the .js file.
+				</p>
+			</Section>
+
+			<Section
+				id='form'
+				title='Form'
+				code={`
+	<form
+		he-event="submit"
+		he-url="http://localhost/api/auth/login"
+		he-method="POST"
+	>
+		<input type="email" name="email">
+		<input type="password" name="password">
+			
+		<button type="submit">Login</button>
+	</form>
+				`}
+			>
+				<p class="ly-text">
+					when the form is submitted the request body will be the form data.
+				</p>
+
+				<Subsection
+					title='Target another form'
+					code={`
+	<form id="form-post">
+		<input type="text" name="title">
+		<input type="text" name="description">
+	</form>
+
+	<button
+		he-event="click"
+		he-url="http://localhost/api/post"
+		he-method="POST"
+
+		he-target-form="#form-post"
+	>
+		Create Post
+	</button>
+					`}
+				>
+					<p class="ly-text">
+						with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-target-form</span> attribute the request body will be the form data of the closest query from the attribute value.
+					</p>
+				</Subsection>
+			</Section>
+
+			<Section
+				id='body'
+				title='Body'
+				code={`
+	<button
+		he-event='click'
+		he-url='http://localhost/api/post'
+		he-method='POST'
+
+		he-body='{"title": "My Post...", "description": "My Description..."}'
+	>
+		Create Post
+	</button>
+				`}
+		>
+				<p slot="title" class="ly-text">
+                    with the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body</span> attribute the request body will be the value of the attribute but the value don't override or overwrite any form data.
+                </p>
+
+				<Subsection
+					title='Set body from attributes'
+					code={`
+	<button
+		he-event='click'
+		he-url='http://localhost/api/post'
+		he-method='POST'
+
+		post-title="My Post..."
+		post-desc="My Description..."
+		he-body-attr='{"title": "post-title", "description": "post-desc"}'
+	>
+		Create Post
+	</button>
+            
+					`}
+				>
+					<p slot="title" class="ly-text">
+						You can set body props from the element attributes using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body-attr</span> attribute.
+					</p>
+				</Subsection>
+
+				
+				<Subsection
+					title='Set body from localStorage'
+					code={`
+	<script>
+		localStorage.setItem("post_title", "My Post...")
+		localStorage.setItem("post_desc", "My Description...")
+	</script>
+
+	<button
+		he-event="click"
+		he-url="http://localhost/api/post"
+		he-method="POST"
+
+		he-body-storage='{"title": "post_title", "description": "post_desc"}'
+	>
+		Create Post
+	</button>
+            
+					`}
+				>
+					<p slot="title" class="ly-text">
+						You can set body props from the localStorage using the <span class="text-nowrap border ly-border-light rounded-full px-1 text-sm ly-bg-light-alt">he-body-storage</span> attribute.
+					</p>
+				</Subsection>
+			</Section>
+		</div>
+	</main>	
+</Layout>
